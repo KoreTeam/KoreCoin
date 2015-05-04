@@ -16,7 +16,7 @@ help further advance the field of crypto-currency.
 
 Setup
 -----
-After completing windows setup then run windows command line (cmd)
+After completing Windows setup then run windows command line (cmd)
   cd daemon
   korecoind
 You would need to create a configuration file korecoin.conf in the default
@@ -40,6 +40,6 @@ Start up the new korecoind.
 
 
 See the documentation/wiki at the KoreCoin site:
-  http://www.korecoin.org/
+http://www.korecoin.net
 for help and more information.
 

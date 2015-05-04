@@ -1,5 +1,5 @@
-Copyright (c) 2014 KoreCoin 2.0 Developers
-Copyright (c) 20010-2014 Bitcoin Developers
+Copyright (c) 2016 KoreCoin 2.0 Developers
+Copyright (c) 2010-2014 Bitcoin Developers
 Distributed under the MIT/X11 software license, see the accompanying
 file license.txt or http://www.opensource.org/licenses/mit-license.php.
 This product includes software developed by the OpenSSL Project for use in
@@ -38,6 +38,6 @@ Start up the new korecoind.
 
 
 See the documentation/wiki at the KoreCoin site:
-  http://www.korecoin.org/
+http://www.korecoin.org/
 for help and more information.
 

@@ -11,44 +11,110 @@ Mac OS X bitcoind build instructions
 Laszlo Hanyecz <solar@heliacal.net>
 Douglas Huff <dhuff@jrbobdobbs.org>
 
-
-See readme-qt.rst for instructions on building Bitcoin QT, the
+Notes
+-----
+See readme-qt.rst for instructions on building Korecoin-Qt, the
 graphical user interface.
 
-Tested on 10.5 and 10.6 intel.  PPC is not supported because it's big-endian.
+Tested on OS X 10.5 through 10.8 on Intel processors only. PPC is not
+supported because it is big-endian.
 
-All of the commands should be executed in Terminal.app.. it's in
-/Applications/Utilities
+All of the commands should be executed in a Terminal application. The
+built-in one is located in `/Applications/Utilities`.
 
-You need to install XCode with all the options checked so that the compiler and
-everything is available in /usr not just /Developer I think it comes on the DVD
-but you can get the current version from http://developer.apple.com
+Preparation
+-----------
+You need to install XCode with all the options checked so that the compiler
+and everything is available in /usr not just /Developer. XCode should be
+available on your OS X installation media, but if not, you can get the
+current version from https://developer.apple.com/xcode/. If you install
+Xcode 4.3 or later, you'll need to install its command line tools. This can
+be done in `Xcode > Preferences > Downloads > Components` and generally must
+be re-done or updated every time Xcode is updated.
+
+There's an assumption that you already have `git` installed, as well. If
+not, it's the path of least resistance to install [Github for Mac](https://mac.github.com/)
+(OS X 10.7+) or
+[Git for OS X](https://code.google.com/p/git-osx-installer/). It is also
+available via Homebrew or MacPorts.
+
+You will also need to install [Homebrew](http://mxcl.github.io/homebrew/)
+or [MacPorts](https://www.macports.org/) in order to install library
+dependencies. It's largely a religious decision which to choose, but, as of
+December 2012, MacPorts is a little easier because you can just install the
+dependencies immediately - no other work required. If you're unsure, read
+the instructions through first in order to assess what you want to do.
+Homebrew is a little more popular among those newer to OS X.
+
+The installation of the actual dependencies is covered in the Instructions
+sections below.
+
+Instructions: MacPorts
+----------------------
+
+### Install dependencies
+
+Installing the dependencies using MacPorts is very straightforward.
+
+    sudo port install boost db48@+no_java openssl miniupnpc
+
+### Building `KoreCoind`
+
+1. Clone the github tree to get the source code and go into the directory.
+
+        git clone git@github.com:KoreTeam/KoreCoin.git KoreCoin
+        cd KoreCoin
+
+2.  Build KoreCoind:
+
+        cd src
+        make -f makefile.osx
+
+3.  It is a good idea to build and run the unit tests, too:
+
+        make -f makefile.osx test
 
 
-1.  Clone the github tree to get the source code:
+		
+Instructions: HomeBrew
+----------------------
 
-git clone git@github.com:bitcoin/bitcoin.git bitcoin
+#### Install dependencies using Homebrew
 
-2.  Download and install MacPorts from http://www.macports.org/
+        brew install boost miniupnpc openssl berkeley-db4
 
-2a. (for 10.7 Lion)
-    Edit /opt/local/etc/macports/macports.conf and uncomment "build_arch i386"
+Note: After you have installed the dependencies, you should check that the Brew installed version of OpenSSL is the one available for compilation. You can check this by typing
 
-3.  Install dependencies from MacPorts
+        openssl version
 
-sudo port install boost db48 openssl miniupnpc
+into Terminal. You should see OpenSSL 1.0.1e 11 Feb 2013.
 
-Optionally install qrencode (and set USE_QRCODE=1):
-sudo port install qrencode
+If not, you can ensure that the Brew OpenSSL is correctly linked by running
 
-4.  Now you should be able to build bitcoind:
+        brew link openssl --force
 
-cd bitcoin/src
-make -f makefile.osx
+Rerunning "openssl version" should now return the correct version.
 
-Run:
-  ./bitcoind --help  # for a list of command-line options.
-Run
-  ./bitcoind -daemon # to start the bitcoin daemon.
-Run
-  ./bitcoind help # When the daemon is running, to get a list of RPC commands
+### Building `Korecoind`
+
+1. Clone the github tree to get the source code and go into the directory.
+
+        git clone https://github.com/KoreTeam/KoreCoin.git
+        cd KoreCoin
+
+2.  Modify source in order to pick up the `openssl` library.
+
+    Edit `makefile.osx` to account for library location differences. There's a
+    diff in `contrib/homebrew/makefile.osx.patch` that shows what you need to
+    change, or you can just patch by doing
+
+        patch -p1 < contrib/homebrew/makefile.osx.patch
+
+3.  Build KoreCoind:
+
+        cd src
+        make -f makefile.osx
+
+4.  It is a good idea to build and run the unit tests, too:
+
+        make -f makefile.osx test
