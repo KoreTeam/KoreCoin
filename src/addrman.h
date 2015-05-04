@@ -97,7 +97,7 @@ public:
 //
 // Design goals:
 //  * Only keep a limited number of addresses around, so that addr.dat and memory requirements do not grow without bound.
-//  * Keep the address tables in-memory, and asynchronously dump the entire to able in addr.dat.
+//  * Keep the address tables in-memory, and asynchronously dump the entire table in addr.dat.
 //  * Make sure no (localized) attacker can fill the entire table with his nodes/addresses.
 //
 // To that end:

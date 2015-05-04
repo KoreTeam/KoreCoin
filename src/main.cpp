@@ -1563,7 +1563,7 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         // already refuses previously-known transaction ids entirely.
         // This rule was originally applied all blocks whose timestamp was after March 15, 2012, 0:00 UTC.
         // Now that the whole chain is irreversibly beyond that time it is applied to all blocks except the
-        // two in the chain that violate it. This prevents exploiting the issue against nodes in their
+        // two in the chain that violate it. This prevents exploiting the issue against nodes during their
         // initial block download.
         CTxIndex txindexOld;
         if (txdb.ReadTxIndex(hashTx, txindexOld)) {
@@ -3142,7 +3142,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
                     block.ReadFromDisk((*mi).second);
                     pfrom->PushMessage("block", block);
 
-                    // Trigger them to send a getblocks request for the next batch of inventory
+                    // Trigger the peer node to send a getblocks request for the next batch of inventory
                     if (inv.hash == pfrom->hashContinue)
                     {
                         // ppcoin: send latest proof-of-work block to allow the
@@ -3618,7 +3618,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
 {
     TRY_LOCK(cs_main, lockMain);
     if (lockMain) {
-        // Don't send anything until we get their version message
+        // Don't send anything until we get its version message
         if (pto->nVersion == 0)
             return true;
 

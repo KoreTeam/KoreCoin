@@ -202,7 +202,7 @@ void SendCoinsDialog::on_sendButton_clicked()
         break;
     case WalletModel::DuplicateAddress:
         QMessageBox::warning(this, tr("Send Coins"),
-            tr("Duplicate address found, can only send to each address once per send operation."),
+            tr("Duplicate address found, addresses should only be used once each."),
             QMessageBox::Ok, QMessageBox::Ok);
         break;
     case WalletModel::TransactionCreationFailed:
