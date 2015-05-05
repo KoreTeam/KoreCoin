@@ -1,4 +1,4 @@
-Copyright (c) 2016 KoreCoin 2.0 Developers
+Copyright (c) 2015 KoreCoin 2.0 Developers
 Copyright (c) 2010-2014 Bitcoin Developers
 Distributed under the MIT/X11 software license, see the accompanying
 file license.txt or http://www.opensource.org/licenses/mit-license.php.
@@ -38,6 +38,6 @@ Start up the new korecoind.
 
 
 See the documentation/wiki at the KoreCoin site:
-http://www.korecoin.org/
+http://www.korecoin.net/
 for help and more information.
 
